@@ -13,7 +13,7 @@ const LanguageContext = createContext<LanguageContextType | undefined>(
 );
 
 // English translations
-const enTranslations: Record<string, string> = {
+export const enTranslations: Record<string, string> = {
   // Navigation
   "nav.home": "Home",
   "nav.projects": "Projects",
