@@ -27,5 +27,6 @@ Planning/*
 
 
 translator.ts
-
+utils/*
 .env
+
