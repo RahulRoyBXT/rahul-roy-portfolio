@@ -1,0 +1,305 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Comic+Neue:wght@400;700&display=swap');
+@import "tailwindcss";
+
+/* Color scheme variables */
+:root {
+  /* Primary brand colors */
+  --color-primary: #4CC9F0;
+  --color-primary-light: #8BE8FF;
+  --color-primary-dark: #0095B6;
+  
+  /* Secondary accent colors */
+  --color-secondary: #F8961E;
+  --color-secondary-light: #FFD166;
+  --color-secondary-dark: #F3722C;
+  
+  /* Additional accent colors */
+  --color-accent: #E63F8A;
+  --color-accent-light: #F072B6;
+  --color-accent-dark: #B50B61;
+  
+  /* Background and surface colors */
+  --color-background: #E9ECEF;
+  --color-background-light: #F8F9FA;
+  --color-background-dark: #212529;
+  
+  /* Text colors for content */
+  --color-text: #333333;
+  --color-text-light: #666666;
+  --color-text-muted: #888888;
+  
+  /* UI component colors */
+  --color-card-bg: #FFFFFF;
+  --color-card-border: rgba(0, 0, 0, 0.05);
+  
+  /* Shadow styles */
+  --shadow-cartoon: 0 4px 0 0 rgba(0, 0, 0, 0.1);
+  --shadow-cartoon-hover: 0 7px 0 0 rgba(0, 0, 0, 0.1);
+  --shadow-elevation-low: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-elevation-medium: 0 4px 8px rgba(0, 0, 0, 0.12);
+  
+  /* Animation timing */
+  --transition-base: 200ms;
+  --transition-slow: 300ms;
+  --transition-theme: 350ms ease-out;
+}
+
+/* Dark theme variables */
+.dark {
+  /* Primary brand colors - brightened for dark mode */
+  --color-primary: #60D7FF;
+  --color-primary-light: #A0E9FF;
+  --color-primary-dark: #1A9AC7;
+  
+  /* Secondary accent colors - brightened for dark mode */
+  --color-secondary: #FFA940;
+  --color-secondary-light: #FFD166;
+  --color-secondary-dark: #F3722C;
+  
+  /* Additional accent colors - brightened for dark mode */
+  --color-accent: #F963A0;
+  --color-accent-light: #FF8FCA;
+  --color-accent-dark: #D0306F;
+  
+  /* Background and surface colors - darkened for dark mode */
+  --color-background: #1A1A2E;
+  --color-background-light: #16213E;
+  --color-background-dark: #0F172A;
+  
+  /* Text colors for content - lightened for dark mode */
+  --color-text: #E9ECEF;
+  --color-text-light: #ADB5BD;
+  --color-text-muted: #8D99AE;
+  
+  /* UI component colors - darkened for dark mode */
+  --color-card-bg: #222831;
+  --color-card-border: rgba(255, 255, 255, 0.05);
+  
+  /* Shadow styles */
+  --shadow-cartoon: 0 4px 0 0 rgba(255, 255, 255, 0.1);
+  --shadow-cartoon-hover: 0 7px 0 0 rgba(255, 255, 255, 0.1);
+  --shadow-elevation-low: 0 2px 4px rgba(0, 0, 0, 0.3);
+  --shadow-elevation-medium: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Apply smooth transition for theme switching 
+   Only transition certain properties to avoid performance issues */
+html {
+  transition: color var(--transition-theme), 
+              background-color var(--transition-theme);
+  scroll-behavior: smooth;
+}
+
+/* Specific properties that should transition */
+*, *::before, *::after {
+  transition-property: background-color, border-color, color, fill, stroke, box-shadow;
+  transition-duration: var(--transition-theme);
+  transition-timing-function: ease-out;
+}
+
+/* Custom scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(155, 155, 155, 0.5);
+  border-radius: 20px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background-color: rgba(100, 100, 100, 0.5);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(155, 155, 155, 0.7);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(100, 100, 100, 0.7);
+}
+
+/* Hide scrollbar when not scrolling */
+.hide-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+.hide-scrollbar::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+
+.hide-scrollbar:hover::-webkit-scrollbar-thumb {
+  background-color: rgba(155, 155, 155, 0.5);
+}
+
+.dark .hide-scrollbar:hover::-webkit-scrollbar-thumb {
+  background-color: rgba(100, 100, 100, 0.5);
+}
+
+/* Base styles that apply to both light and dark mode */
+body {
+  background-color: var(--color-background-light);
+  color: var(--color-text);
+  overflow-x: hidden; /* Prevent horizontal scrollbar */
+}
+
+/* Ensure proper dark mode background */
+.dark body {
+  background-color: var(--color-background);
+  color: var(--color-text);
+}
+
+/* Base styles */
+html {
+  font-family: 'Poppins', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Comic Neue', cursive;
+  font-weight: bold;
+}
+
+/* Component styles */
+.btn {
+  padding-left: 1.5rem; /* px-6 */
+  padding-right: 1.5rem; /* px-6 */
+  padding-top: 0.75rem; /* py-3 */
+  padding-bottom: 0.75rem; /* py-3 */
+  border-radius: 1rem; /* rounded-cartoon */
+  transition-property: all;
+  transition-duration: 300ms;
+  font-weight: 500; /* font-medium */
+  box-shadow: var(--shadow-cartoon);
+}
+
+.btn-primary {
+  color: white;
+  background-color: var(--color-primary);
+}
+
+.btn-primary:hover {
+  transform: translateY(-0.25rem); /* -translate-y-1 */
+  box-shadow: var(--shadow-cartoon-hover);
+}
+
+.btn-secondary {
+  color: white;
+  background-color: var(--color-secondary);
+}
+
+.btn-secondary:hover {
+  transform: translateY(-0.25rem); /* -translate-y-1 */
+  box-shadow: var(--shadow-cartoon-hover);
+}
+
+.card {
+  border-radius: 1rem; /* rounded-cartoon */
+  padding: 1.5rem; /* p-6 */
+  transition-property: all;
+  transition-duration: 300ms;
+  background-color: var(--color-card-bg);
+  box-shadow: var(--shadow-cartoon);
+  border: 1px solid var(--color-card-border);
+}
+
+.card-hover:hover {
+  transform: translateY(-0.5rem); /* -translate-y-2 */
+  box-shadow: var(--shadow-cartoon-hover);
+}
+
+/* Custom utility classes for theme colors */
+.bg-primary {
+  background-color: var(--color-primary) !important;
+}
+
+.text-primary {
+  color: var(--color-primary) !important;
+}
+
+.bg-secondary {
+  background-color: var(--color-secondary) !important;
+}
+
+.text-secondary {
+  color: var(--color-secondary) !important;
+}
+
+.bg-accent {
+  background-color: var(--color-accent) !important;
+}
+
+.text-accent {
+  color: var(--color-accent) !important;
+}
+
+.bg-background-light {
+  background-color: var(--color-background-light) !important;
+}
+
+.bg-white {
+  background-color: var(--color-card-bg) !important;
+}
+
+/* Ensure text colors work properly in dark mode */
+.dark .text-gray-600, 
+.dark .text-gray-700, 
+.dark .text-gray-800 {
+  color: var(--color-text-light) !important;
+}
+
+.text-muted {
+  color: var(--color-text-muted) !important;
+}
+
+/* Utility classes */
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-bounce-short {
+  animation: bounce-short 2s ease-in-out infinite;
+}
+
+/* Add utility for elements that should not transition */
+.no-transition {
+  transition: none !important;
+}
+
+/* Add utility for elements that should not use dark mode */
+.dark-ignore {
+  background-color: white !important;
+  color: #1a202c !important;
+}
+
+/* Add utility for rounded corners that match your design */
+.rounded-cartoon {
+  border-radius: 1rem;
+}
+
+/* Define animations */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes bounce-short {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
