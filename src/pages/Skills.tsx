@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import SkillsSection from "../components/sections/SkillsSection";
+import { Helmet } from 'react-helmet';
 
-const Skills = () => {
-  return (
+const Skills = () => {  return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -10,6 +10,65 @@ const Skills = () => {
       transition={{ duration: 0.5 }}
       className="pt-24 md:pt-32"
     >
+      {/* SEO Metadata and Structured Data */}
+      <Helmet>
+        <title>Skills & Expertise | Rahul Roy's Portfolio</title>
+        <meta name="description" content="Explore Rahul Roy's technical skills and expertise in full-stack development, including React, Node.js, MongoDB, and cloud technologies." />
+        <meta name="keywords" content="Rahul Roy, web development skills, React, Node.js, MongoDB, JavaScript, full-stack development" />
+        
+        {/* Open Graph tags */}
+        <meta property="og:title" content="Skills & Expertise | Rahul Roy's Portfolio" />
+        <meta property="og:description" content="Explore Rahul Roy's technical skills and expertise in full-stack development, including React, Node.js, MongoDB, and cloud technologies." />
+        <meta property="og:image" content="https://rahulroydev.netlify.app/logo.png" />
+        <meta property="og:url" content="https://rahulroydev.netlify.app/skills" />
+        <meta property="og:type" content="website" />
+        
+        {/* Twitter Card tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Skills & Expertise | Rahul Roy's Portfolio" />
+        <meta name="twitter:description" content="Explore Rahul Roy's technical skills and expertise in full-stack development, including React, Node.js, MongoDB, and cloud technologies." />
+        <meta name="twitter:image" content="https://rahulroydev.netlify.app/logo.png" />
+        
+        {/* JSON-LD structured data for skills */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfilePage",
+            "mainEntity": {
+              "@type": "Person",
+              "name": "Rahul Roy",
+              "url": "https://rahulroydev.netlify.app",
+              "jobTitle": "Full Stack Developer",
+              "knowsAbout": [
+                "React", "Node.js", "JavaScript", "TypeScript", "MongoDB", 
+                "Express", "RESTful API", "Socket.IO", "Redux", "Tailwind CSS",
+                "Responsive Design", "Web Development", "Full Stack Development"
+              ],
+              "hasCredential": [
+                {
+                  "@type": "EducationalOccupationalCredential",
+                  "credentialCategory": "Skill",
+                  "name": "Frontend Development",
+                  "description": "Expertise in React, Redux, and modern JavaScript frameworks"
+                },
+                {
+                  "@type": "EducationalOccupationalCredential",
+                  "credentialCategory": "Skill",
+                  "name": "Backend Development",
+                  "description": "Experience with Node.js, Express, and MongoDB"
+                },
+                {
+                  "@type": "EducationalOccupationalCredential",
+                  "credentialCategory": "Skill",
+                  "name": "Full Stack Development",
+                  "description": "End-to-end application development and deployment"
+                }
+              ]
+            }
+          })}
+        </script>
+      </Helmet>
+
       <div className="max-w-7xl mx-auto px-6 md:px-12 mb-12">
         <motion.h1
           className="text-4xl md:text-5xl font-bold mb-4 text-center"

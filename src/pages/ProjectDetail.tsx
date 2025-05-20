@@ -5,6 +5,7 @@ import { FiArrowLeft, FiExternalLink, FiGithub } from 'react-icons/fi';
 import { getProjectById } from '../constants/projectsData';
 import { Project } from '../types/project';
 import { useLanguage } from '../context/LanguageContext';
+import { Helmet } from 'react-helmet';
 
 const ProjectDetail = () => {
   const { t } = useLanguage();
@@ -43,8 +44,7 @@ const ProjectDetail = () => {
   if (!project) {
     return null;
   }
-  
-  return (
+    return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -52,6 +52,49 @@ const ProjectDetail = () => {
       transition={{ duration: 0.5 }}
       className="pt-24 md:pt-32 pb-16 px-6 md:px-12"
     >
+      {/* SEO Metadata and Structured Data */}
+      <Helmet>
+        <title>{project.title} | Rahul Roy's Portfolio</title>
+        <meta name="description" content={project.description} />
+        <meta name="keywords" content={project.tags.join(', ')} />
+        
+        {/* Open Graph tags */}
+        <meta property="og:title" content={project.title} />
+        <meta property="og:description" content={project.description} />
+        {project.image && <meta property="og:image" content={project.image.startsWith('http') ? project.image : `https://rahulroydev.netlify.app${project.image}`} />}
+        <meta property="og:url" content={`https://rahulroydev.netlify.app/projects/${project.id}`} />
+        <meta property="og:type" content="website" />
+        
+        {/* Twitter Card tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={project.title} />
+        <meta name="twitter:description" content={project.description} />
+        {project.image && <meta name="twitter:image" content={project.image.startsWith('http') ? project.image : `https://rahulroydev.netlify.app${project.image}`} />}
+        
+        {/* JSON-LD structured data */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            "name": project.title,
+            "description": project.description,
+            "applicationCategory": "WebApplication",
+            "operatingSystem": "Any",
+            "author": {
+              "@type": "Person",
+              "name": "Rahul Roy"
+            },
+            "datePublished": "2025-05-21", // You may want to add actual dates to your project data
+            "softwareVersion": "1.0",
+            "url": `https://rahulroydev.netlify.app/projects/${project.id}`,
+            "image": project.image ? (project.image.startsWith('http') ? project.image : `https://rahulroydev.netlify.app${project.image}`) : "",
+            "keywords": project.tags.join(', '),
+            "codeRepository": project.githubUrl,
+            ...(project.demoUrl ? { "installUrl": project.demoUrl } : {})
+          })}
+        </script>
+      </Helmet>
+
       <div className="max-w-7xl mx-auto">
         {/* Back button */}
         <Link to="/projects">

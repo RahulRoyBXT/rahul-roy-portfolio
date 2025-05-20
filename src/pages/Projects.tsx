@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import ProjectCard from '../components/common/ProjectCard';
 import { projectsData } from '../constants/projectsData';
 import { useLanguage } from '../context/LanguageContext';
+import { Helmet } from 'react-helmet';
 
 const Projects = () => {
   const { t } = useLanguage();
@@ -19,8 +20,7 @@ const Projects = () => {
   const filteredProjects = filter === 'all' 
     ? projectsData 
     : projectsData.filter(project => project.tags.includes(filter));
-  
-  return (
+    return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -28,6 +28,59 @@ const Projects = () => {
       transition={{ duration: 0.5 }}
       className="pt-24 md:pt-32 pb-16 px-6 md:px-12 max-w-7xl mx-auto"
     >
+      {/* SEO Metadata and Structured Data */}
+      <Helmet>
+        <title>Projects | Rahul Roy's Portfolio</title>
+        <meta name="description" content="Explore Rahul Roy's portfolio of web development projects, including full-stack applications, APIs, and responsive front-end designs." />
+        <meta name="keywords" content={allTags.join(', ') + ', portfolio, web development, projects'} />
+        
+        {/* Open Graph tags */}
+        <meta property="og:title" content="Projects | Rahul Roy's Portfolio" />
+        <meta property="og:description" content="Explore Rahul Roy's portfolio of web development projects, including full-stack applications, APIs, and responsive front-end designs." />
+        <meta property="og:image" content="https://rahulroydev.netlify.app/logo.png" />
+        <meta property="og:url" content="https://rahulroydev.netlify.app/projects" />
+        <meta property="og:type" content="website" />
+        
+        {/* Twitter Card tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Projects | Rahul Roy's Portfolio" />
+        <meta name="twitter:description" content="Explore Rahul Roy's portfolio of web development projects, including full-stack applications, APIs, and responsive front-end designs." />
+        <meta name="twitter:image" content="https://rahulroydev.netlify.app/logo.png" />
+        
+        {/* JSON-LD structured data for project collection */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "CollectionPage",
+            "name": "Rahul Roy's Projects",
+            "description": "Collection of software development projects by Rahul Roy",
+            "url": "https://rahulroydev.netlify.app/projects",
+            "author": {
+              "@type": "Person",
+              "name": "Rahul Roy",
+              "url": "https://rahulroydev.netlify.app"
+            },
+            "mainEntity": {
+              "@type": "ItemList",
+              "itemListElement": projectsData.map((project, index) => ({
+                "@type": "ListItem",
+                "position": index + 1,
+                "url": `https://rahulroydev.netlify.app/projects/${project.id}`,
+                "item": {
+                  "@type": "SoftwareApplication",
+                  "name": project.title,
+                  "description": project.description,
+                  "image": project.image ? (project.image.startsWith('http') ? project.image : `https://rahulroydev.netlify.app${project.image}`) : "",
+                  "applicationCategory": "WebApplication",
+                  "operatingSystem": "Any",
+                  "url": `https://rahulroydev.netlify.app/projects/${project.id}`
+                }
+              }))
+            }
+          })}
+        </script>
+      </Helmet>
+
       <div className="text-center mb-12">
         <motion.h1 
           className="text-4xl md:text-5xl font-bold mb-4"
